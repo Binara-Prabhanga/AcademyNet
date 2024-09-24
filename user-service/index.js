@@ -387,45 +387,48 @@ app.post('/updatePassword', passport.authenticate('jwt', { session: false }), as
 });
 
 // Buy Course
+// POST endpoint to process a course purchase by a user. 
 app.post('/buyCourse/:courseId',  async (req, res) => {
     try {
-        const userId = req.body.userId;
-        const { _id } = userId;
-        const { courseId } = req.params;
-        const course = await Course.findById(courseId);
-        console.log("course check", course);
+      // Extract userId from request body and courseId from parameters
+      const userId = req.body.userId;
+      const { _id } = userId;
+      const { courseId } = req.params;
+      const course = await Course.findById(courseId);
+      console.log("course check", course);
 
+      if (!course) {
+        return res.status(404).json({ error: "Course not found" });
+      }
 
-        if (!course) {
-            return res.status(404).json({ error: 'Course not found' });
-        }
+      course.userWhoHasBought.push(userId);
+      await course.save();
 
-        course.userWhoHasBought.push(userId);
-        await course.save();
+      const buyerUser = await User.findById(userId);
+      if (!buyerUser) {
+        return res.status(404).json({ error: "User not found" });
+      }
+      buyerUser.coursesBought.push(courseId);
+      buyerUser.totalExpenditure =
+        (buyerUser.totalExpenditure || 0) + parseInt(course.price);
+      await buyerUser.save();
 
-        const buyerUser = await User.findById(userId);
-        if (!buyerUser) {
-          return res.status(404).json({ error: "User not found" });
-        }
-        buyerUser.coursesBought.push(courseId);
-        buyerUser.totalExpenditure = (buyerUser.totalExpenditure || 0) + parseInt(course.price);
-        await buyerUser.save();
+      const index = buyerUser.cart.findIndex(
+        (courseid) => courseId.toString() === courseid.toString()
+      );
+      buyerUser.cart.splice(index, 1);
+      await buyerUser.save();
 
-        const index = buyerUser.cart.findIndex((courseid) => courseId.toString() === courseid.toString());
-        buyerUser.cart.splice(index, 1);  
-        await buyerUser.save();
+      const buyerUserResponse = await User.findById(userId)
+        .populate("coursesCreated")
+        .populate("coursesBought")
+        .populate("cart");
 
-        const buyerUserResponse = await User.findById(userId)
-          .populate("coursesCreated")
-          .populate("coursesBought")
-          .populate("cart");
+      const seller = await User.findById(course.createdBy);
+      seller.totalIncome = (seller.totalIncome || 0) + parseInt(course.price);
+      await seller.save();
 
-        const seller = await User.findById(course.createdBy);
-        seller.totalIncome = (seller.totalIncome || 0) + parseInt(course.price);
-        await seller.save();
-
-        
-        return res.status(200).json({ message: course});
+      return res.status(200).json({ message: course });
     } catch (err) {
         console.log("error in buyCourse", err.message);
         res.status(400).json({ 'Error in buyCourse': err.message });

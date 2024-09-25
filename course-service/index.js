@@ -4,7 +4,21 @@ const app = express();
 
 //Helmet to set various HTTP headers for security
 app.use(helmet());
-
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"], // Restricting to self
+      scriptSrc: ["'self'", "https://trusted-scripts.com"], // Example for trusted script source
+      styleSrc: ["'self'", "'unsafe-inline'"], // Allow inline styles for CSS
+      imgSrc: ["'self'", "https://trusted-images.com"], // Example for trusted images
+      connectSrc: ["'self'", "https://api.trusted.com"], // Trusted API sources
+      frameAncestors: ["'none'"], // Prevent framing
+      formAction: ["'self'"], // Only allow forms to submit to same origin
+      upgradeInsecureRequests: [], // Upgrade to HTTPS if necessary
+      objectSrc: ["'none'"], // Prevent any object embedding (like Flash, etc.)
+    },
+  })
+);
 
 const PORT = process.env.PORT_ONE || 8080;
 const mongoose = require("mongoose");
@@ -114,7 +128,7 @@ app.post(
   }
 );
 
-//Hash Disclosure - BCrypt 
+//Hash Disclosure - BCrypt
 // FETCH ALL APPROVED COURSES (Excluding Password)
 app.get(
   "/getAllCourse",
@@ -128,12 +142,12 @@ app.get(
         .populate("coursesCreated")
         .populate("coursesBought")
         .populate("cart")
-        .select('-password');
+        .select("-password");
 
       // Fetch all approved courses, and exclude the password from the 'createdBy' field
       const allApprovedCourses = await Course.find({ approve: true }).populate({
         path: "createdBy",
-        select: "-password"
+        select: "-password",
       });
 
       if (allApprovedCourses.length === 0) {
@@ -148,7 +162,7 @@ app.get(
   }
 );
 
-//Hash Disclosure - BCrypt 
+//Hash Disclosure - BCrypt
 // FETCH ALL NON-APPROVED COURSES (Excluding Password)
 app.get(
   "/getAllCourseNot",
@@ -162,16 +176,20 @@ app.get(
         .populate("coursesCreated")
         .populate("coursesBought")
         .populate("cart")
-        .select('-password');
+        .select("-password");
 
       // Fetch all non-approved courses, and exclude the password from the 'createdBy' field
-      const allApprovedCourses = await Course.find({ approve: false }).populate({
-        path: "createdBy",
-        select: "-password"
-      });
+      const allApprovedCourses = await Course.find({ approve: false }).populate(
+        {
+          path: "createdBy",
+          select: "-password",
+        }
+      );
 
       if (allApprovedCourses.length === 0) {
-        return res.status(400).json({ message: "No non-approved courses found" });
+        return res
+          .status(400)
+          .json({ message: "No non-approved courses found" });
       }
 
       return res.status(200).json({ message: allApprovedCourses, user });
@@ -223,7 +241,7 @@ app.put(
   }
 );
 
-//Hash Disclosure - BCrypt 
+//Hash Disclosure - BCrypt
 // FETCH COURSE DETAILS BY ID (Excluding Password)
 app.get(
   "/getCourseById/:courseId",
@@ -235,7 +253,7 @@ app.get(
       // Fetch the course by ID, excluding the password field from the 'createdBy' field
       const course = await Course.findOne({ _id: courseId }).populate({
         path: "createdBy",
-        select: "-password"
+        select: "-password",
       });
 
       return res.status(200).json({ message: course });

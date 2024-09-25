@@ -1,4 +1,5 @@
 const express = require("express");
+const helmet = require("helmet");
 const app = express();
 const Razorpay = require("razorpay");
 const PORT = process.env.PORT_ONE || 5000;
@@ -47,6 +48,22 @@ app.use(function (req, res, next) {
   );
   next();
 });
+
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "https://trusted-scripts.com"],
+      styleSrc: ["'self'", "'unsafe-inline'"],
+      imgSrc: ["'self'", "https://trusted-images.com"],
+      connectSrc: ["'self'", "https://api.trusted.com"],
+      frameAncestors: ["'none'"],
+      formAction: ["'self'"],
+      upgradeInsecureRequests: [],
+      objectSrc: ["'none'"],
+    },
+  })
+);
 
 let loggedInUsers = [];
 app.use(morgan("dev"));
@@ -202,46 +219,50 @@ app.put("/users/:userId/deactivate", async (req, res) => {
 });
 
 //ADMIN
-//Hash Disclosure - BCrypt 
+//Hash Disclosure - BCrypt
 // FETCH USERS (Excluding Password)
-app.get('/api/:userId/users', async (req, res) => {
-    try {
-        // Get the _id of the logged-in user
-        const _id = req.params.userId;
+app.get("/api/:userId/users", async (req, res) => {
+  try {
+    // Get the _id of the logged-in user
+    const _id = req.params.userId;
 
-        // Fetch all users from the database except the logged-in user, excluding their password
-        const users = await User.find({ _id: { $ne: _id } }).select('-password');
-        res.json(users);
-    } catch (err) {
-        console.error('Error fetching users:', err);
-        res.status(500).json({ error: 'Internal server error' });
-    }
+    // Fetch all users from the database except the logged-in user, excluding their password
+    const users = await User.find({ _id: { $ne: _id } }).select("-password");
+    res.json(users);
+  } catch (err) {
+    console.error("Error fetching users:", err);
+    res.status(500).json({ error: "Internal server error" });
+  }
 });
 
-//Hash Disclosure - BCrypt 
+//Hash Disclosure - BCrypt
 // ADMIN - UPDATE USER ROLE (Excluding Password)
-app.put('/api/users/:userId/role', async (req, res) => {
-    try {
-        const userId = req.params.userId;
-        const { role } = req.body;
+app.put("/api/users/:userId/role", async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const { role } = req.body;
 
-        // Validate the role
-        if (!['Admin', 'Instructor', 'Learner'].includes(role)) {
-            return res.status(400).json({ error: 'Invalid role' });
-        }
-
-        // Find the user by ID and update their role, excluding the password in the response
-        const updatedUser = await User.findByIdAndUpdate(userId, { role }, { new: true }).select('-password');
-
-        if (!updatedUser) {
-            return res.status(404).json({ error: 'User not found' });
-        }
-
-        res.json(updatedUser);
-    } catch (err) {
-        console.error('Error updating user role:', err);
-        res.status(500).json({ error: 'Internal server error' });
+    // Validate the role
+    if (!["Admin", "Instructor", "Learner"].includes(role)) {
+      return res.status(400).json({ error: "Invalid role" });
     }
+
+    // Find the user by ID and update their role, excluding the password in the response
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { role },
+      { new: true }
+    ).select("-password");
+
+    if (!updatedUser) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    res.json(updatedUser);
+  } catch (err) {
+    console.error("Error updating user role:", err);
+    res.status(500).json({ error: "Internal server error" });
+  }
 });
 
 async function sendEmail(to, OTP, subject) {

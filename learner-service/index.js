@@ -78,21 +78,23 @@ mongoose.connect(
   }
 );
 
-// User Courses
-app.get(
-  "/userCourses",
-  passport.authenticate("jwt", { session: false }),
-  async (req, res) => {
+//Hash Disclosure - BCrypt 
+// User Courses (Excluding Password)
+app.get('/userCourses', passport.authenticate('jwt', { session: false }), async (req, res) => {
     try {
-      const { _id } = req.user;
-      const user = await User.findOne({ _id })
-        .populate("coursesCreated")
-        .populate("coursesBought")
-        .populate("cart");
-      return res.status(200).json({ message: user });
+        const { _id } = req.user;
+
+        // Fetch the user data, excluding the password field
+        const user = await User.findOne({ _id })
+            .populate('coursesCreated')
+            .populate('coursesBought')
+            .populate('cart')
+            .select('-password'); // Exclude password from the user data
+
+        return res.status(200).json({ message: user });
     } catch (err) {
-      console.log("error in userCourses", err.message);
-      res.status(400).json({ "Error in userCourse": err.message });
+        console.log("error in userCourses", err.message);
+        res.status(400).json({ 'Error in userCourse': err.message });
     }
   }
 );

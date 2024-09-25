@@ -12,7 +12,6 @@ app.use(
       styleSrc: ["'self'", "'unsafe-inline'"], // Allow inline styles for CSS
       imgSrc: ["'self'", "https://trusted-images.com"], // Example for trusted images
       connectSrc: ["'self'", "https://api.trusted.com"], // Trusted API sources
-      frameAncestors: ["'none'"], // Prevent framing
       formAction: ["'self'"], // Only allow forms to submit to same origin
       upgradeInsecureRequests: [], // Upgrade to HTTPS if necessary
       objectSrc: ["'none'"], // Prevent any object embedding (like Flash, etc.)
@@ -59,6 +58,7 @@ app.use(passport.initialize());
 
 // Add middleware to block malicious Host headers targeting internal IP addresses
 app.use((req, res, next) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
   res.setHeader("X-Frame-Options", "DENY");
   res.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains; preload"); // Set HSTS
 

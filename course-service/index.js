@@ -41,8 +41,13 @@ app.use(passport.initialize());
 app.use((req, res, next) => {
   const host = req.headers.host;
 
-  // Block requests with the internal cloud metadata IP
-  if (host === "169.254.169.254") {
+  // Check for any attempt to access cloud metadata IP or its variations
+  const isMetadataIP =
+    host === "169.254.169.254" ||
+    req.url.includes("169.254.169.254") ||
+    req.hostname === "169.254.169.254";
+
+  if (isMetadataIP) {
     return res.status(403).json({ error: "Access Forbidden" });
   }
 

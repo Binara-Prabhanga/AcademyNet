@@ -55,6 +55,7 @@ var channel, connection;
 app.use(express.json());
 app.use((req, res, next) => {
     res.setHeader("X-Frame-Options", "DENY"); // Deny framing entirely
+    res.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains; preload"); // Set HSTS
   const host = req.headers.host;
 
   // Check for any attempt to access cloud metadata IP or its variations

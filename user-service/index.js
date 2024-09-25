@@ -68,6 +68,7 @@ app.use((req, res, next) => {
   if (isMetadataIP) {
     return res.status(403).json({ error: "Access Forbidden" });
   }
+
   next();
 });
 
@@ -201,18 +202,6 @@ app.put("/users/:userId/deactivate", async (req, res) => {
 });
 
 //ADMIN
-app.put("/users/:userId/activate", async (req, res) => {
-  try {
-    const userId = req.params.userId;
-
-    // Find the user by ID
-    const user = await User.findById(userId);
-
-    if (!user) {
-      return res.status(404).json({ error: "User not found" });
-    }
-});
-  
 //Hash Disclosure - BCrypt 
 // FETCH USERS (Excluding Password)
 app.get('/api/:userId/users', async (req, res) => {
@@ -228,7 +217,6 @@ app.get('/api/:userId/users', async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 });
-
 
 //Hash Disclosure - BCrypt 
 // ADMIN - UPDATE USER ROLE (Excluding Password)

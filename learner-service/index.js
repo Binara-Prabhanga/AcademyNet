@@ -1,4 +1,5 @@
 const express = require("express");
+const helmet = require("helmet");
 const app = express();
 const PORT = process.env.PORT_ONE || 8000;
 const mongoose = require("mongoose");
@@ -47,11 +48,13 @@ app.use(function (req, res, next) {
 let loggedInUsers = [];
 app.use(morgan("dev"));
 app.use(passport.initialize());
+app.use(helmet());
 
 var channel, connection;
 
 app.use(express.json());
 app.use((req, res, next) => {
+    res.setHeader("X-Frame-Options", "DENY"); // Deny framing entirely
   const host = req.headers.host;
 
   // Check for any attempt to access cloud metadata IP or its variations

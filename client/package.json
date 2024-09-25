@@ -8,7 +8,7 @@
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "arr-flatten": "^1.1.0",
-    "axios": "^0.20.0",
+    "axios": "^1.7.7",
     "classnames": "^2.2.6",
     "jwt-decode": "^2.2.0",
     "once": "^1.4.0",
@@ -18,7 +18,7 @@
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.3",
+    "react-scripts": "^5.0.1",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "wrappy": "^1.0.2"

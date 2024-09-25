@@ -211,64 +211,49 @@ app.put("/users/:userId/activate", async (req, res) => {
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
-
-    // Update the active status to false
-    user.active = true;
-
-    // Save the updated user
-    await user.save();
-
-    res.json({ message: "User deactivated successfully" });
-  } catch (err) {
-    console.error("Error in deactivating user:", err.message);
-    res.status(500).json({ error: "Internal server error" });
-  }
 });
-
-//ADMIN
-//Hash Disclosure - BCrypt
+  
+//Hash Disclosure - BCrypt 
 // FETCH USERS (Excluding Password)
-app.get("/api/:userId/users", async (req, res) => {
-  try {
-    // Get the _id of the logged-in user
-    const _id = req.params.userId;
+app.get('/api/:userId/users', async (req, res) => {
+    try {
+        // Get the _id of the logged-in user
+        const _id = req.params.userId;
 
-    // Fetch all users from the database except the logged-in user, excluding their password
-    const users = await User.find({ _id: { $ne: _id } }).select("-password");
-    res.json(users);
-  } catch (err) {
-    console.error("Error fetching users:", err);
-    res.status(500).json({ error: "Internal server error" });
-  }
+        // Fetch all users from the database except the logged-in user, excluding their password
+        const users = await User.find({ _id: { $ne: _id } }).select('-password');
+        res.json(users);
+    } catch (err) {
+        console.error('Error fetching users:', err);
+        res.status(500).json({ error: 'Internal server error' });
+    }
 });
 
+
+//Hash Disclosure - BCrypt 
 // ADMIN - UPDATE USER ROLE (Excluding Password)
-app.put("/api/users/:userId/role", async (req, res) => {
-  try {
-    const userId = req.params.userId;
-    const { role } = req.body;
+app.put('/api/users/:userId/role', async (req, res) => {
+    try {
+        const userId = req.params.userId;
+        const { role } = req.body;
 
-    // Validate the role
-    if (!["Admin", "Instructor", "Learner"].includes(role)) {
-      return res.status(400).json({ error: "Invalid role" });
+        // Validate the role
+        if (!['Admin', 'Instructor', 'Learner'].includes(role)) {
+            return res.status(400).json({ error: 'Invalid role' });
+        }
+
+        // Find the user by ID and update their role, excluding the password in the response
+        const updatedUser = await User.findByIdAndUpdate(userId, { role }, { new: true }).select('-password');
+
+        if (!updatedUser) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        res.json(updatedUser);
+    } catch (err) {
+        console.error('Error updating user role:', err);
+        res.status(500).json({ error: 'Internal server error' });
     }
-
-    // Find the user by ID and update their role, excluding the password in the response
-    const updatedUser = await User.findByIdAndUpdate(
-      userId,
-      { role },
-      { new: true }
-    ).select("-password");
-
-    if (!updatedUser) {
-      return res.status(404).json({ error: "User not found" });
-    }
-
-    res.json(updatedUser);
-  } catch (err) {
-    console.error("Error updating user role:", err);
-    res.status(500).json({ error: "Internal server error" });
-  }
 });
 
 async function sendEmail(to, OTP, subject) {

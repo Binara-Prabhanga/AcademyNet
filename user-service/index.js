@@ -202,15 +202,19 @@ app.put("/users/:userId/deactivate", async (req, res) => {
 });
 
 //ADMIN
-app.put("/users/:userId/activate", async (req, res) => {
-  try {
-    const userId = req.params.userId;
+//Hash Disclosure - BCrypt 
+// FETCH USERS (Excluding Password)
+app.get('/api/:userId/users', async (req, res) => {
+    try {
+        // Get the _id of the logged-in user
+        const _id = req.params.userId;
 
-    // Find the user by ID
-    const user = await User.findById(userId);
-
-    if (!user) {
-      return res.status(404).json({ error: "User not found" });
+        // Fetch all users from the database except the logged-in user, excluding their password
+        const users = await User.find({ _id: { $ne: _id } }).select('-password');
+        res.json(users);
+    } catch (err) {
+        console.error('Error fetching users:', err);
+        res.status(500).json({ error: 'Internal server error' });
     }
 
     // Update the active status to false
@@ -226,11 +230,11 @@ app.put("/users/:userId/activate", async (req, res) => {
   }
 });
 
-//ADMIN
-app.get("/api/:userId/users", async (req, res) => {
-  try {
-    // Get the _id of the logged-in user
-    const _id = req.params.userId;
+// ADMIN - UPDATE USER ROLE (Excluding Password)
+app.put('/api/users/:userId/role', async (req, res) => {
+    try {
+        const userId = req.params.userId;
+        const { role } = req.body;
 
     // Fetch all users from the database except the logged-in user
     const users = await User.find({ _id: { $ne: _id } });
@@ -241,11 +245,9 @@ app.get("/api/:userId/users", async (req, res) => {
   }
 });
 
-//ADMIN
-app.put("/api/users/:userId/role", async (req, res) => {
-  try {
-    const userId = req.params.userId;
-    const { role } = req.body;
+        // Find the user by ID and update their role, excluding the password in the response
+        const updatedUser = await User.findByIdAndUpdate(userId, { role }, { new: true }).select('-password');
+
 
     // Validate the role
     if (!["Admin", "Instructor", "Learner"].includes(role)) {

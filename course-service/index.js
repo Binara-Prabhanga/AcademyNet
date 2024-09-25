@@ -107,21 +107,27 @@ app.post(
   }
 );
 
-// All Courses
+//Hash Disclosure - BCrypt 
+// FETCH ALL APPROVED COURSES (Excluding Password)
 app.get(
   "/getAllCourse",
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     try {
       const { _id } = req.user;
+
+      // Fetch the logged-in user, excluding the password field
       const user = await User.findById(_id)
         .populate("coursesCreated")
         .populate("coursesBought")
-        .populate("cart");
+        .populate("cart")
+        .select('-password');
 
-      const allApprovedCourses = await Course.find({ approve: true }).populate(
-        "createdBy"
-      );
+      // Fetch all approved courses, and exclude the password from the 'createdBy' field
+      const allApprovedCourses = await Course.find({ approve: true }).populate({
+        path: "createdBy",
+        select: "-password"
+      });
 
       if (allApprovedCourses.length === 0) {
         return res.status(400).json({ message: "No approved courses found" });
@@ -135,24 +141,29 @@ app.get(
   }
 );
 
-// NON APPROVED COURSES
+// FETCH ALL NON-APPROVED COURSES (Excluding Password)
 app.get(
   "/getAllCourseNot",
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     try {
       const { _id } = req.user;
+
+      // Fetch the logged-in user, excluding the password field
       const user = await User.findById(_id)
         .populate("coursesCreated")
         .populate("coursesBought")
-        .populate("cart");
+        .populate("cart")
+        .select('-password');
 
-      const allApprovedCourses = await Course.find({ approve: false }).populate(
-        "createdBy"
-      );
+      // Fetch all non-approved courses, and exclude the password from the 'createdBy' field
+      const allApprovedCourses = await Course.find({ approve: false }).populate({
+        path: "createdBy",
+        select: "-password"
+      });
 
       if (allApprovedCourses.length === 0) {
-        return res.status(400).json({ message: "No approved courses found" });
+        return res.status(400).json({ message: "No non-approved courses found" });
       }
 
       return res.status(200).json({ message: allApprovedCourses, user });

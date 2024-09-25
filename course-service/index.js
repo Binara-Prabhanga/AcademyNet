@@ -136,6 +136,7 @@ app.get(
   }
 );
 
+//Hash Disclosure - BCrypt 
 // FETCH ALL NON-APPROVED COURSES (Excluding Password)
 app.get(
   "/getAllCourseNot",
@@ -210,16 +211,21 @@ app.put(
   }
 );
 
-// Course Details by ID
+//Hash Disclosure - BCrypt 
+// FETCH COURSE DETAILS BY ID (Excluding Password)
 app.get(
   "/getCourseById/:courseId",
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     try {
       const { courseId } = req.params;
-      const course = await Course.findOne({ _id: courseId }).populate(
-        "createdBy"
-      );
+
+      // Fetch the course by ID, excluding the password field from the 'createdBy' field
+      const course = await Course.findOne({ _id: courseId }).populate({
+        path: "createdBy",
+        select: "-password"
+      });
+
       return res.status(200).json({ message: course });
     } catch (err) {
       console.log("error in courseDetailsById", err.message);

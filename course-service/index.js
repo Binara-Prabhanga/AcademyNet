@@ -1,5 +1,11 @@
 const express = require("express");
+const helmet = require("helmet");
 const app = express();
+
+//Helmet to set various HTTP headers for security
+app.use(helmet());
+
+
 const PORT = process.env.PORT_ONE || 8080;
 const mongoose = require("mongoose");
 const User = require("./user");
@@ -39,6 +45,7 @@ app.use(passport.initialize());
 
 // Add middleware to block malicious Host headers targeting internal IP addresses
 app.use((req, res, next) => {
+  res.setHeader("X-Frame-Options", "DENY");
   const host = req.headers.host;
 
   // Check for any attempt to access cloud metadata IP or its variations

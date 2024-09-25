@@ -55,6 +55,17 @@ app.use(passport.initialize());
 var channel, connection;
 
 app.use(express.json());
+app.use((req, res, next) => {
+    const host = req.headers.host;
+
+    // Block requests with the internal cloud metadata IP
+    if (host === '169.254.169.254') {
+        return res.status(403).json({ error: 'Access Forbidden' });
+    }
+
+    next();
+});
+
 mongoose.connect(
   process.env.MONGO_URL,
   {

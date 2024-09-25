@@ -2,7 +2,7 @@
   "name": "microservices-app",
   "version": "1.0.0",
   "scripts": {
-    "start:client": "cd client && set NODE_OPTIONS=--openssl-legacy-provider && npm start",
+    "start:client": "cd client && npm start",
     "start:course": "cd course-service && npm start",
     "start:learner": "cd learner-service && npm start",
     "start:user": "cd user-service && npm start",

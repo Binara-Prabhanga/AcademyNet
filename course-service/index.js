@@ -32,7 +32,14 @@ initializePassport();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors());
+
+// Configure CORS to allow only localhost
+app.use(
+  cors({
+    origin: "http://localhost:3000", // Assuming your frontend runs on this port
+    credentials: true,
+  })
+);
 
 app.use(morgan("dev"));
 app.use(passport.initialize());

@@ -170,6 +170,9 @@ app.use(
 // explicitly suppress the X-Powered-By header
 app.use(helmet.hidePoweredBy());
 
+// disable x-powered-by header
+app.disable("x-powered-by")
+
 mongoose.connect(
   process.env.MONGO_URL,
   {

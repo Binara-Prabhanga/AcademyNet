@@ -57,6 +57,9 @@ app.use(
 // explicitly suppress the X-Powered-By header
 app.use(helmet.hidePoweredBy());
 
+// disable x-powered-by header
+app.disable("x-powered-by")
+
 const PORT = process.env.PORT_ONE || 8080;
 const mongoose = require("mongoose");
 const User = require("./user");

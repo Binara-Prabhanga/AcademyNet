@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const helmet = require("helmet");
 const app = express();
 
@@ -42,7 +43,6 @@ const validateForgotPassword = require("./validation/forgotPassword");
 const validateUserUpdatePassword = require("./validation/updatePassword");
 const dotenv = require("dotenv");
 dotenv.config();
-const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
 const initializePassport = require("./config/passport"); // Import Passport configuration
@@ -51,10 +51,18 @@ initializePassport();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors());
-
 app.use(morgan("dev"));
 app.use(passport.initialize());
+
+// Configure CORS
+const corsOptions = {
+  origin: ["http://localhost:8080", "http://localhost:5000", "http://localhost:3000"],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true,
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+
+app.use(cors(corsOptions));
 
 // Add middleware to block malicious Host headers targeting internal IP addresses
 app.use((req, res, next) => {

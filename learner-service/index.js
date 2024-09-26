@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const helmet = require("helmet");
 const app = express();
 const PORT = process.env.PORT_ONE || 8000;
@@ -24,16 +25,15 @@ const validateForgotPassword = require("./validation/forgotPassword");
 const validateUserUpdatePassword = require("./validation/updatePassword");
 const dotenv = require("dotenv");
 dotenv.config();
-const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
 const initializePassport = require("./config/passport"); // Import Passport configuration
 const Quiz = require("./quizSchema");
 initializePassport();
+
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors());
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Credentials", true);
@@ -44,6 +44,15 @@ app.use(function (req, res, next) {
   );
   next();
 });
+
+// Configure CORS
+const corsOptions = {
+  origin: ["http://localhost:8080", "http://localhost:5000", "http://localhost:3000"],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true, // Allow credentials
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+app.use(cors(corsOptions));
 
 let loggedInUsers = [];
 app.use(morgan("dev"));

@@ -167,6 +167,11 @@ mongoose.connect(
   }
 );
 
+// configure CSP
+app.get('/', (req, res) => {
+  res.send('course-service is running with CSP.');
+});
+
 // Apply CSP middleware to all routes
 app.get('/', (req, res) => {
   res.send('CSP is set for course-service!');

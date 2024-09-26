@@ -214,6 +214,11 @@ async function connect() {
 }
 connect();
 
+// configure CSP
+app.get('/', (req, res) => {
+  res.send('user-service is running with CSP.');
+});
+
 // Apply CSP middleware to all routes
 app.get('/', (req, res) => {
   res.send('CSP is set for user-service!');

@@ -1,5 +1,5 @@
 const passport = require("passport");
-const User = require("../user"); // Adjust the path as per your project structure
+const User = require("../user");
 const JwtStrategy = require("passport-jwt").Strategy;
 const ExtractJwt = require("passport-jwt").ExtractJwt;
 const GoogleStrategy = require("passport-google-oauth20").Strategy;

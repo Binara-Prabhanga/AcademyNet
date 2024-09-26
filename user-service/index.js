@@ -50,14 +50,6 @@ app.get(
   passport.authenticate("google", { scope: ["profile", "email"] })
 );
 
-app.get(
-  "/auth/google/callback",
-  passport.authenticate("google", { failureRedirect: "/" }),
-  (req, res) => {
-    res.redirect("/"); // Redirect to your desired route after successful login
-  }
-);
-
 app.get("/logout", (req, res) => {
   req.logout();
   res.redirect("/");
@@ -158,8 +150,6 @@ app.use((req, res, next) => {
 
 let loggedInUsers = [];
 app.use(morgan("dev"));
-
-app.use(passport.initialize());
 
 var channel, connection;
 
@@ -321,7 +311,7 @@ app.get(
   passport.authenticate("google", { failureRedirect: "/" }),
   (req, res) => {
     console.log("Google OAuth successful", req.user); // Log user details
-    res.redirect("/");
+    res.redirect("/home");
   }
 );
 

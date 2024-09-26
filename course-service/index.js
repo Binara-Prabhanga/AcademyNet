@@ -41,7 +41,6 @@ app.use(
       ],
       frameSrc: ["'self'", "https://m.stripe.network"],
       formAction: ["'self'"],
-      frameAncestors: ["'none'"],
       upgradeInsecureRequests: [],
       objectSrc: ["'none'"],
       baseUri: ["'none'"],
@@ -110,7 +109,6 @@ const corsOptions = {
   },
   credentials: true, // Allow credentials (cookies, authorization headers)
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Allow specific methods
-  allowedHeaders: ["Content-Type", "Authorization"], // Allow specific headers
   preflightContinue: false, // Disable passing preflight responses to next handlers
   optionsSuccessStatus: 204, // Response status for successful OPTIONS requests
 };
@@ -121,6 +119,9 @@ app.use((req, res, next) => {
   // Set security headers
   res.setHeader("X-Content-Type-Options", "nosniff");
   res.setHeader("X-Frame-Options", "DENY"); // Deny framing entirely
+  res.setHeader("X-Frame-Options", "SAMEORIGIN"); // Allow framing from the same origin
+  // Alternatively, use Content-Security-Policy's frame-ancestors directive
+  res.setHeader("Content-Security-Policy", "frame-ancestors 'self';"); 
   res.setHeader(
     "Strict-Transport-Security",
     "max-age=31536000; includeSubDomains; preload"

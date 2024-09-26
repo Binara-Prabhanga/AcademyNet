@@ -4,18 +4,27 @@ const helmet = require("helmet");
 const app = express();
 
 //Helmet to set various HTTP headers for security
-app.use(helmet());
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
-      defaultSrc: ["'self'"], // Restricting to self
-      scriptSrc: ["'self'", "https://trusted-scripts.com"], // Example for trusted script source
-      styleSrc: ["'self'", "'unsafe-inline'"], // Allow inline styles for CSS
-      imgSrc: ["'self'", "https://trusted-images.com"], // Example for trusted images
-      connectSrc: ["'self'", "https://api.trusted.com"], // Trusted API sources
-      formAction: ["'self'"], // Only allow forms to submit to same origin
-      upgradeInsecureRequests: [], // Upgrade to HTTPS if necessary
-      objectSrc: ["'none'"], // Prevent any object embedding (like Flash, etc.)
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "https://js.stripe.com"],
+      styleSrc: [
+        "'self'",
+        "'sha256-0hAheEzaMe6uXIKV4EehS9pu1am1lj/KnnzrOYqckXk='",
+      ],
+      imgSrc: ["'self'", "https://q.stripe.com"],
+      connectSrc: [
+        "'self'",
+        "https://api.stripe.com",
+        "https://merchant-ui-api.stripe.com",
+      ],
+      frameSrc: ["'self'", "https://m.stripe.network"],
+      formAction: ["'self'"],
+      frameAncestors: ["'none'"],
+      objectSrc: ["'none'"],
+      baseUri: ["'none'"],
+      reportUri: ["https://q.stripe.com/csp-report"],
     },
   })
 );

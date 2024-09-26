@@ -36,17 +36,32 @@ module.exports = () => {
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         callbackURL: "/auth/google/callback",
       },
-      async (token, tokenSecret, profile, done) => {
+      async (accessToken, refreshToken, profile, done) => {
         try {
           let user = await User.findOne({ googleId: profile.id });
+  
           if (!user) {
+            // If no user is found, create a new user
             user = new User({
               googleId: profile.id,
               name: profile.displayName,
               email: profile.emails[0].value,
+              accessToken,  // Store accessToken in the user object
+              refreshToken, // Store refreshToken if provided
             });
             await user.save();
+          } else {
+            // Update the user's accessToken each time they log in
+            user.accessToken = accessToken;
+  
+            // Optionally update the refreshToken if it's provided (usually on first login)
+            if (refreshToken) {
+              user.refreshToken = refreshToken;
+            }
+  
+            await user.save(); // Save updated tokens
           }
+  
           done(null, user);
         } catch (err) {
           done(err, null);
@@ -54,6 +69,7 @@ module.exports = () => {
       }
     )
   );
+  
 
   // Serialize and Deserialize User
   passport.serializeUser((user, done) => {

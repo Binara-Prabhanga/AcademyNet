@@ -1,35 +1,42 @@
 const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
-const app = express();
 const Razorpay = require("razorpay");
-const PORT = process.env.PORT_ONE || 5000;
 const mongoose = require("mongoose");
-const User = require("./user");
 const nodemailer = require("nodemailer");
-const Course = require("./course");
 const jwt = require("jsonwebtoken");
 const amqp = require("amqplib");
 const passport = require("passport");
 const bcrypt = require("bcryptjs");
 const axios = require("axios");
 const gravatar = require("gravatar");
+const dotenv = require("dotenv");
+const cookieParser = require("cookie-parser");
+const morgan = require("morgan");
+const stripe = require("stripe")(process.env.STRIPE_SECRET);
+
+const User = require("./user");
+const Course = require("./course");
 const keys = require("./config/keys");
 const validateUserLoginInput = require("./validation/userLogin");
 const validateUserRegisterInput = require("./validation/userRegister");
 const validateOTP = require("./validation/otpValidation");
 const validateForgotPassword = require("./validation/forgotPassword");
 const validateUserUpdatePassword = require("./validation/updatePassword");
-const dotenv = require("dotenv");
-dotenv.config();
 const initializePassport = require("./config/passport");
+
+dotenv.config();
 initializePassport();
-const stripe = require("stripe")(process.env.STRIPE_SECRET);
-const cookieParser = require("cookie-parser");
-const morgan = require("morgan");
+
+const app = express();
+const PORT = process.env.PORT_ONE || 5000;
+
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser());
+app.use(morgan("dev"));
+app.use(passport.initialize());
+app.use(helmet());
 
 const allowedOrigins = [
   "http://localhost:3000",
@@ -53,17 +60,6 @@ const corsOptions = {
   optionsSuccessStatus: 204, // Response status for successful OPTIONS requests
 };
 app.use(cors(corsOptions));
-
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Credentials", true);
-  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
-  );
-  next();
-});
 
 app.use(
   helmet.contentSecurityPolicy({
@@ -90,22 +86,18 @@ app.use(
   })
 );
 
-let loggedInUsers = [];
-app.use(morgan("dev"));
+app.use((req, res, next) => {
+  res.setHeader(
+    "Strict-Transport-Security",
+    "max-age=31536000; includeSubDomains; preload"
+  );
+  next();
+});
 
-app.use(passport.initialize());
-
-var channel, connection;
-
-app.use(express.json());
 app.use((req, res, next) => {
   // Set security headers
   res.setHeader("X-Content-Type-Options", "nosniff");
   res.setHeader("X-Frame-Options", "DENY"); // Deny framing entirely
-  res.setHeader(
-    "Strict-Transport-Security",
-    "max-age=31536000; includeSubDomains; preload"
-  ); // Set HSTS
 
   // Get the IP address of the request
   const forwardedFor =
@@ -140,6 +132,7 @@ mongoose.connect(
   }
 );
 
+let channel, connection;
 async function connect() {
   const amqpServer = "amqp://localhost:5672";
   connection = await amqp.connect(amqpServer);
@@ -258,9 +251,7 @@ app.put("/users/:userId/deactivate", cors(corsOptions), async (req, res) => {
   }
 });
 
-//ADMIN
-//Hash Disclosure - BCrypt
-// FETCH USERS (Excluding Password)
+// Fetch users (excluding password)
 app.get("/api/:userId/users", cors(corsOptions), async (req, res) => {
   try {
     // Get the _id of the logged-in user
@@ -275,8 +266,7 @@ app.get("/api/:userId/users", cors(corsOptions), async (req, res) => {
   }
 });
 
-//Hash Disclosure - BCrypt
-// ADMIN - UPDATE USER ROLE (Excluding Password)
+// Update user role (excluding password)
 app.put("/api/users/:userId/role", cors(corsOptions), async (req, res) => {
   try {
     const userId = req.params.userId;
@@ -413,7 +403,6 @@ app.post("/postOTP", cors(corsOptions), async (req, res) => {
 });
 
 // Update password
-// Update password
 app.post(
   "/updatePassword",
   passport.authenticate("jwt", { session: false }),
@@ -449,15 +438,11 @@ app.post(
 );
 
 // Buy Course
-// POST endpoint to process a course purchase by a user.
 app.post("/buyCourse/:courseId", cors(corsOptions), async (req, res) => {
   try {
-    // Extract userId from request body and courseId from parameters
     const userId = req.body.userId;
-    const { _id } = userId;
     const { courseId } = req.params;
     const course = await Course.findById(courseId);
-    console.log("course check", course);
 
     if (!course) {
       return res.status(404).json({ error: "Course not found" });

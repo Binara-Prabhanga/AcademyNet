@@ -39,18 +39,18 @@ const allowedOrigins = [
 
 const corsOptions = {
   origin: (origin, callback) => {
-    // Allow requests with no origin like mobile apps, curl, etc.
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) === -1) {
-      const msg =
-        "The CORS policy for this site does not allow access from the specified origin.";
-      return callback(new Error(msg), false);
+    if (!origin) return callback(null, true); // Allow non-browser clients (like curl)
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true); // Allow requests from allowed origins
+    } else {
+      return callback(new Error("Not allowed by CORS"), false); // Block others
     }
-    return callback(null, true);
   },
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true, // Allow cookies or authentication credentials
-  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true, // Allow credentials (cookies, authorization headers)
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Allow specific methods
+  allowedHeaders: ["Content-Type", "Authorization"], // Allow specific headers
+  preflightContinue: false, // Disable passing preflight responses to next handlers
+  optionsSuccessStatus: 204, // Response status for successful OPTIONS requests
 };
 app.use(cors(corsOptions));
 

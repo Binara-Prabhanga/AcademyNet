@@ -50,7 +50,6 @@ const Quiz = require("./quizSchema");
 initializePassport();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(cookieParser());
 app.use(morgan("dev"));
 app.use(passport.initialize());
 
@@ -108,6 +107,14 @@ app.use((req, res, next) => {
 
   next();
 });
+
+// Add cookieParser middleware with SameSite option
+app.use(
+  cookieParser({
+    sameSite: "Lax",
+    secure: true, // Ensure cookies are only sent over HTTPS
+  })
+);
 
 mongoose.connect(
   process.env.MONGO_URL,

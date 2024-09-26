@@ -33,8 +33,8 @@ app.use(cookieParser());
 
 const allowedOrigins = [
   "http://localhost:3000",
-  "http://localhost:8080", 
-  "http://localhost:5000", 
+  "http://localhost:8080",
+  "http://localhost:5000",
 ];
 
 const corsOptions = {
@@ -89,18 +89,30 @@ var channel, connection;
 
 app.use(express.json());
 app.use((req, res, next) => {
-  res.setHeader('X-Content-Type-Options', 'nosniff');
-  res.setHeader("X-Frame-Options", "DENY");// Deny framing entirely
-  res.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains; preload"); // Set HSTS
-  const host = req.headers.host;
+  // Set security headers
+  res.setHeader("X-Content-Type-Options", "nosniff");
+  res.setHeader("X-Frame-Options", "DENY"); // Deny framing entirely
+  res.setHeader(
+    "Strict-Transport-Security",
+    "max-age=31536000; includeSubDomains; preload"
+  ); // Set HSTS
 
-  // Check for any attempt to access cloud metadata IP or its variations
+  // Get the IP address of the request
+  const forwardedFor =
+    req.headers["x-forwarded-for"] || req.connection.remoteAddress;
+
+  // Define the metadata IP we want to block
+  const metadataIP = "169.254.169.254";
+
+  // Check if the request is attempting to access the metadata IP
   const isMetadataIP =
-    host === "169.254.169.254" ||
-    req.url.includes("169.254.169.254") ||
-    req.hostname === "169.254.169.254";
+    req.headers.host === metadataIP ||
+    req.url.includes(metadataIP) ||
+    req.hostname === metadataIP ||
+    forwardedFor.includes(metadataIP);
 
   if (isMetadataIP) {
+    console.log(`Blocked attempt to access metadata IP from ${forwardedFor}`);
     return res.status(403).json({ error: "Access Forbidden" });
   }
 

@@ -65,12 +65,27 @@ app.use(
   helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "https://js.stripe.com"],
+      scriptSrc: [
+        "'self'",
+        "https://js.stripe.com",
+        "https://trusted-scripts.com",
+        "https://m.stripe.network",
+        "'sha256-/5Guo2nzv5n/w6ukZpOBZOtTJBJPSkJ6mhHpnBgm3Ls='"
+      ],
       styleSrc: [
         "'self'",
         "'sha256-0hAheEzaMe6uXIKV4EehS9pu1am1lj/KnnzrOYqckXk='",
+        "'unsafe-inline'",
+        "https://m.stripe.network",
       ],
-      imgSrc: ["'self'", "https://q.stripe.com"],
+      imgSrc: [
+        "'self'",
+        "https://q.stripe.com",
+        "https://trusted-images.com",
+        "https://m.stripe.network",
+        "https://b.stripecdn.com"
+      ],
+      mediarc: ["'none'"],
       connectSrc: [
         "'self'",
         "https://api.stripe.com",
@@ -79,12 +94,20 @@ app.use(
       frameSrc: ["'self'", "https://m.stripe.network"],
       formAction: ["'self'"],
       frameAncestors: ["'none'"],
+      upgradeInsecureRequests: [],
       objectSrc: ["'none'"],
       baseUri: ["'none'"],
       reportUri: ["https://q.stripe.com/csp-report"],
+      workerSrc: ["'none'"],
+      // Add the report-to directive for newer CSP reporting
+      reportTo: "/csp-violation-report-endpoint"
     },
+    reportOnly: false,
   })
 );
+
+// explicitly suppress the X-Powered-By header
+app.disable("x-powered-by")
 
 app.use((req, res, next) => {
   res.setHeader(
@@ -140,6 +163,18 @@ async function connect() {
   await channel.assertQueue("PRODUCT");
 }
 connect();
+
+// Apply CSP middleware to all routes
+app.get('/', (req, res) => {
+  res.send('CSP is set for user-service!');
+});
+
+// CSP Reporting Endpoint
+app.post('/csp-violation-report-endpoint', (req, res) => {
+  console.log('CSP Violation Report:', req.body);
+  // You can log this to a file or a logging service here
+  res.status(204).end(); // Respond with no content
+});
 
 app.post("/register", cors(corsOptions), async (req, res) => {
   try {

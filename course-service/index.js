@@ -134,6 +134,7 @@ app.use((req, res, next) => {
   const metadataIP = "169.254.169.254";
 
   // Check if the request is attempting to access the metadata IP
+
   const isMetadataIP =
     req.headers.host === metadataIP ||
     req.url.includes(metadataIP) ||

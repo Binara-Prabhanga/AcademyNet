@@ -82,6 +82,8 @@ var channel, connection;
 
 app.use(express.json());
 app.use((req, res, next) => {
+  // Check for any attempt to access cloud metadata IP or its variations
+
   // Set security headers
   res.setHeader("X-Content-Type-Options", "nosniff");
   res.setHeader("X-Frame-Options", "DENY"); // Deny framing entirely
@@ -98,6 +100,7 @@ app.use((req, res, next) => {
   const metadataIP = "169.254.169.254";
 
   // Check if the request is attempting to access the metadata IP
+
   const isMetadataIP =
     req.headers.host === metadataIP ||
     req.url.includes(metadataIP) ||

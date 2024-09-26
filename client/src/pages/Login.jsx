@@ -38,54 +38,84 @@ const Login = () => {
         }
     }, [errorRoot.loginErrors, store.isAuthenticated])
 
+    const handleGoogleLogin = () => {
+        window.location.href = '/auth/google';
+    }
+
 
     return (
-        <div className="container">
-            <div className="row mt-5">
-                <div className="col-md-4 m-auto">
-                    <h1 className="display-4 text-center">USER</h1>
-                    <form noValidate onSubmit={formSubmitHandler} >
-                        <div className="form-group">
-                            <label htmlFor="exampleInputEmail1">Email address</label>
-                            <input onChange={(e) => setEmail(e.target.value)} type="email"  value={email} id="exampleInputEmail1" aria-describedby="emailHelp" className={classnames("form-control",
-                                {
-                                    'is-invalid': errors.email
-
-                                })} />
-                            {errors.email && (<div className="invalid-feedback">{errors.email}</div>)} 
-                            
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="exampleInputPassword1">Password</label>
-                            <input onChange={(e) => setPassword(e.target.value)} type="password"  value={password} id="exampleInputPassword1"
-                                className={classnames("form-control",
-                                    {
-                                        'is-invalid': errors.password
-
-                                    })} />
-                            {errors.password && (<div className="invalid-feedback">{errors.password}</div>)}
-                        </div>
-                        <div class="row justify-content-center">
-                            <div class="col-md-1">
-                                {
-                                    isLoading && <div class="spinner-border text-primary" role="status">
-                                        <span class="sr-only">Loading...</span>
-                                    </div>
-                                }
-                            </div>
-                        </div>
-                        {!isLoading && <button type="submit" className="btn btn-info btn-block">Login</button>}
-                    </form>
-                    <div className="mt-3">
-                        <Link className="mt-4" to="/register">Dont have an Account?</Link>
+      <div className="container">
+        <div className="row mt-5">
+          <div className="col-md-4 m-auto">
+            <h1 className="display-4 text-center">USER</h1>
+            <form noValidate onSubmit={formSubmitHandler}>
+              <div className="form-group">
+                <label htmlFor="exampleInputEmail1">Email address</label>
+                <input
+                  onChange={(e) => setEmail(e.target.value)}
+                  type="email"
+                  value={email}
+                  id="exampleInputEmail1"
+                  aria-describedby="emailHelp"
+                  className={classnames("form-control", {
+                    "is-invalid": errors.email,
+                  })}
+                />
+                {errors.email && (
+                  <div className="invalid-feedback">{errors.email}</div>
+                )}
+              </div>
+              <div className="form-group">
+                <label htmlFor="exampleInputPassword1">Password</label>
+                <input
+                  onChange={(e) => setPassword(e.target.value)}
+                  type="password"
+                  value={password}
+                  id="exampleInputPassword1"
+                  className={classnames("form-control", {
+                    "is-invalid": errors.password,
+                  })}
+                />
+                {errors.password && (
+                  <div className="invalid-feedback">{errors.password}</div>
+                )}
+              </div>
+              <div class="row justify-content-center">
+                <div class="col-md-1">
+                  {isLoading && (
+                    <div class="spinner-border text-primary" role="status">
+                      <span class="sr-only">Loading...</span>
                     </div>
-                    <div className="mt-3">
-                        <Link className="mt-4" to="/forgotPassword">Forgot Password?</Link>
-                    </div>
+                  )}
                 </div>
+              </div>
+              {!isLoading && (
+                <button type="submit" className="btn btn-info btn-block">
+                  Login
+                </button>
+              )}
+            </form>
+            <button
+              onClick={handleGoogleLogin}
+              className="btn btn-danger btn-block mt-4"
+            >
+              Login with Google
+            </button>
+
+            <div className="mt-3">
+              <Link className="mt-4" to="/register">
+                Dont have an Account?
+              </Link>
             </div>
+            <div className="mt-3">
+              <Link className="mt-4" to="/forgotPassword">
+                Forgot Password?
+              </Link>
+            </div>
+          </div>
         </div>
-    )
+      </div>
+    );
 }
 
 export default Login

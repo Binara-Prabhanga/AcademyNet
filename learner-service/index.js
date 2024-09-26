@@ -113,18 +113,27 @@ app.use((req, res, next) => {
 });
 
 // Helmet security headers, including CSP
-app.use(helmet());
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "https://trusted-scripts.com"],
-      styleSrc: ["'self'", "'unsafe-inline'"],
-      imgSrc: ["'self'", "https://trusted-images.com"],
-      connectSrc: ["'self'", "https://api.trusted.com"],
+      scriptSrc: ["'self'", "https://js.stripe.com"],
+      styleSrc: [
+        "'self'",
+        "'sha256-0hAheEzaMe6uXIKV4EehS9pu1am1lj/KnnzrOYqckXk='",
+      ],
+      imgSrc: ["'self'", "https://q.stripe.com"],
+      connectSrc: [
+        "'self'",
+        "https://api.stripe.com",
+        "https://merchant-ui-api.stripe.com",
+      ],
+      frameSrc: ["'self'", "https://m.stripe.network"],
       formAction: ["'self'"],
-      upgradeInsecureRequests: [],
+      frameAncestors: ["'none'"],
       objectSrc: ["'none'"],
+      baseUri: ["'none'"],
+      reportUri: ["https://q.stripe.com/csp-report"],
     },
   })
 );

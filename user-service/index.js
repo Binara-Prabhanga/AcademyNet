@@ -1,6 +1,9 @@
 const express = require("express");
+const session = require("express-session");
 const cors = require("cors");
 const helmet = require("helmet");
+const passport = require("passport");
+require("./config/passport"); 
 const app = express();
 const Razorpay = require("razorpay");
 const PORT = process.env.PORT_ONE || 5000;
@@ -10,7 +13,6 @@ const nodemailer = require("nodemailer");
 const Course = require("./course");
 const jwt = require("jsonwebtoken");
 const amqp = require("amqplib");
-const passport = require("passport");
 const bcrypt = require("bcryptjs");
 const axios = require("axios");
 const gravatar = require("gravatar");
@@ -30,6 +32,36 @@ const morgan = require("morgan");
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser());
+
+
+app.use(
+  session({
+    secret:
+      "ZvEFI9ZLHTia1VeUas4J3D6pYPdGyFRmQ2h4gh0RXZXOv3Cw6YhT2Ec400xZM8edwd",
+    resave: false,
+    saveUninitialized: true,
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.get(
+  "/auth/google",
+  passport.authenticate("google", { scope: ["profile", "email"] })
+);
+
+app.get(
+  "/auth/google/callback",
+  passport.authenticate("google", { failureRedirect: "/" }),
+  (req, res) => {
+    res.redirect("/"); // Redirect to your desired route after successful login
+  }
+);
+
+app.get("/logout", (req, res) => {
+  req.logout();
+  res.redirect("/");
+});
 
 const allowedOrigins = [
   "http://localhost:3000",
@@ -279,6 +311,15 @@ app.post("/login", cors(corsOptions), async (req, res) => {
   }
 });
 
+app.get(
+  "/auth/google/callback",
+  passport.authenticate("google", { failureRedirect: "/" }),
+  (req, res) => {
+    console.log("Google OAuth successful", req.user); // Log user details
+    res.redirect("/");
+  }
+);
+
 // ADMIN
 app.put("/users/:userId/deactivate", cors(corsOptions), async (req, res) => {
   try {
@@ -303,6 +344,7 @@ app.put("/users/:userId/deactivate", cors(corsOptions), async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
+
 
 //ADMIN
 //Hash Disclosure - BCrypt

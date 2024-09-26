@@ -59,7 +59,12 @@ app.use(passport.initialize());
 
 // Add middleware to block malicious Host headers targeting internal IP addresses
 app.use((req, res, next) => {
-  res.setHeader("X-Frame-Options", "DENY");
+  res.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains; preload");
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader("X-Frame-Options", "SAMEORIGIN"); // Allow framing from the same origin
+  res.setHeader("X-Frame-Options", "DENY"); // Deny framing entirely
+  // Alternatively, use Content-Security-Policy's frame-ancestors directive
+  res.setHeader("Content-Security-Policy", "frame-ancestors 'self';"); // Allow framing only from the same origin
   const host = req.headers.host;
 
   // Check for any attempt to access cloud metadata IP or its variations

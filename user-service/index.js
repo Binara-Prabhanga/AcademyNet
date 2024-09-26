@@ -74,6 +74,12 @@ var channel, connection;
 
 app.use(express.json());
 app.use((req, res, next) => {
+  res.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains; preload");
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader("X-Frame-Options", "SAMEORIGIN"); // Allow framing from the same origin
+  res.setHeader("X-Frame-Options", "DENY"); // Deny framing entirely
+  // Alternatively, use Content-Security-Policy's frame-ancestors directive
+  res.setHeader("Content-Security-Policy", "frame-ancestors 'self';"); // Allow framing only from the same origin
   res.setHeader("X-Frame-Options", "DENY");// Deny framing entirely
   const host = req.headers.host;
 

@@ -2,6 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
 const app = express();
+const fs = require("fs");
+const path = require("path");
 
 //Helmet to set various HTTP headers for security
 app.use(
@@ -59,6 +61,13 @@ app.use(helmet.hidePoweredBy());
 
 // disable x-powered-by header
 app.disable("x-powered-by")
+
+// Logging error details to a file
+const logFilePath = path.join(__dirname, 'error.log');
+const logErrorToFile = (error) => {
+    const logMessage = `[${new Date().toISOString()}] ${error.stack || error}\n`;
+    fs.appendFileSync(logFilePath, logMessage);
+};
 
 const PORT = process.env.PORT_ONE || 8080;
 const mongoose = require("mongoose");
@@ -220,10 +229,7 @@ app.post(
       await user.save();
       res.status(200).json({ message: course });
     } catch (err) {
-      console.log("Error in addCourse", err.message);
-      res
-        .status(400)
-        .json({ error: "Error in addCourse", message: err.message });
+      next(err);
     }
   }
 );
@@ -257,8 +263,7 @@ app.get(
 
       return res.status(200).json({ message: allApprovedCourses, user });
     } catch (err) {
-      console.log("Error in getAllCourse", err.message);
-      res.status(400).json({ "Error in getAllCourse": err.message });
+      next(err);
     }
   }
 );
@@ -296,8 +301,7 @@ app.get(
 
       return res.status(200).json({ message: allApprovedCourses, user });
     } catch (err) {
-      console.log("Error in getAllCourse", err.message);
-      res.status(400).json({ "Error in getAllCourse": err.message });
+      next(err);
     }
   }
 );
@@ -336,10 +340,7 @@ app.put(
         .status(200)
         .json({ message: "Course approval updated successfully", course });
     } catch (err) {
-      console.log("Error in updateCourseApproval", err.message);
-      res
-        .status(400)
-        .json({ error: "Error in updateCourseApproval", message: err.message });
+      next(err);
     }
   }
 );
@@ -362,8 +363,7 @@ app.get(
 
       return res.status(200).json({ message: course });
     } catch (err) {
-      console.log("error in courseDetailsById", err.message);
-      res.status(400).json({ "Error in courseDetailsById": err.message });
+      next(err);
     }
   }
 );
@@ -439,10 +439,7 @@ app.put(
 
       res.status(200).json({ message: "Course updated successfully", course });
     } catch (err) {
-      console.log("Error in updateCourse", err.message);
-      res
-        .status(400)
-        .json({ error: "Error in updateCourse", message: err.message });
+      next(err);
     }
   }
 );
@@ -470,10 +467,7 @@ app.delete(
 
       res.status(200).json({ message: "Course deleted successfully" });
     } catch (err) {
-      console.log("Error in deleteCourse", err.message);
-      res
-        .status(400)
-        .json({ error: "Error in deleteCourse", message: err.message });
+      next(err);
     }
   }
 );
@@ -506,10 +500,7 @@ app.delete(
 
       res.status(200).json({ message: "Video deleted successfully" });
     } catch (err) {
-      console.log("Error in deleteCourseVideo", err.message);
-      res
-        .status(400)
-        .json({ error: "Error in deleteCourseVideo", message: err.message });
+      next(err);
     }
   }
 );
@@ -563,10 +554,7 @@ app.post(
 
       res.status(200).json({ message: "Quiz created successfully", quiz });
     } catch (error) {
-      console.error("Error creating quiz:", error);
-      res
-        .status(500)
-        .json({ error: "Error creating quiz", message: error.message });
+      next(err);
     }
   }
 );
@@ -589,8 +577,7 @@ app.get(
 
       return res.status(200).json({ message: quizzes });
     } catch (err) {
-      console.log("error in getAllCourse", err.message);
-      res.status(400).json({ "Error in getAllCourse": err.message });
+      next(err);
     }
   }
 );
@@ -622,10 +609,7 @@ app.delete(
 
       res.status(200).json({ message: "Quiz deleted successfully" });
     } catch (err) {
-      console.log("Error in deleteQuiz", err.message);
-      res
-        .status(400)
-        .json({ error: "Error in deleteQuiz", message: err.message });
+      next(err);
     }
   }
 );
@@ -650,9 +634,8 @@ app.get(
       }));
 
       res.status(200).json({ submittedQuizzes });
-    } catch (error) {
-      console.error("Error fetching user quizzes:", error);
-      res.status(500).json({ message: "Internal server error" });
+    } catch (err) {
+      next(err);
     }
   }
 );
@@ -676,8 +659,7 @@ app.get(
 
       return res.status(200).json({ quizzes });
     } catch (err) {
-      console.log("Error in fetching quizzes by courseId:", err.message);
-      res.status(500).json({ error: "Internal server error" });
+      next(err);
     }
   }
 );
@@ -730,12 +712,27 @@ app.get(
       }
 
       res.status(200).json({ userDetails });
-    } catch (error) {
-      console.error("Error fetching user details:", error);
-      res.status(500).json({ message: "Internal server error" });
+    } catch (err) {
+      next(err);
     }
   }
 );
+
+app.use((err, req, res, next) => {
+  // Log the error to the console or a log file
+  console.error(err);
+
+  // Log error details to a file
+  logErrorToFile(err);
+
+  // Send a generic error response to the client
+  res.status(err.statusCode || 500).json({
+    message:
+      err.message ||
+      "An internal server error occurred. Please try again later.",
+  });
+});
+
 
 app.listen(PORT, () => {
   console.log(`Course-Service at ${PORT}`);

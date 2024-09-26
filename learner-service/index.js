@@ -29,7 +29,16 @@ const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
 const initializePassport = require("./config/passport"); // Import Passport configuration
 const Quiz = require("./quizSchema");
+const fs = require("fs");
+const path = require("path");
 initializePassport();
+
+// Logging error details to a file
+const logFilePath = path.join(__dirname, 'error.log');
+const logErrorToFile = (error) => {
+    const logMessage = `[${new Date().toISOString()}] ${error.stack || error}\n`;
+    fs.appendFileSync(logFilePath, logMessage);
+};
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -223,8 +232,7 @@ app.get(
 
       return res.status(200).json({ message: user });
     } catch (err) {
-      console.log("error in userCourses", err.message);
-      res.status(400).json({ "Error in userCourse": err.message });
+      next(err);
     }
   }
 );
@@ -258,8 +266,7 @@ app.delete(
           .json({ message: "Course not found in user coursesBought" });
       }
     } catch (err) {
-      console.log("error in deleteUserCourses", err.message);
-      res.status(400).json({ "Error in deleteUserCourses": err.message });
+      next(err);
     }
   }
 );
@@ -294,10 +301,7 @@ app.post(
 
       res.status(200).json({ message: "Question added successfully", course });
     } catch (err) {
-      console.log("Error in commentOnQna", err.message);
-      res
-        .status(400)
-        .json({ error: "Error in commentOnQna", message: err.message });
+      next(err);
     }
   }
 );
@@ -347,9 +351,8 @@ app.post(
       }
 
       res.status(200).json({ message: "Marks updated successfully" });
-    } catch (error) {
-      console.error("Error submitting answers:", error);
-      res.status(500).json({ message: "Internal server error" });
+    } catch (err) {
+      next(err);
     }
   }
 );
@@ -375,10 +378,7 @@ app.delete(
 
       res.status(200).json({ message: "Quiz deleted successfully" });
     } catch (err) {
-      console.error("Error in deleteQuiz:", err.message);
-      res
-        .status(400)
-        .json({ error: "Error in deleteQuiz", message: err.message });
+      next(err);
     }
   }
 );
@@ -401,11 +401,26 @@ app.get(
         .populate("cart");
       res.status(200).json({ message: userRes });
     } catch (err) {
-      console.log("error in addToCart", err.message);
-      res.status(400).json({ "Error in addToCart": err.message });
+      next(err);
     }
   }
 );
+
+app.use((err, req, res, next) => {
+  // Log the error to the console or a log file
+  console.error(err);
+
+  // Log error details to a file
+  logErrorToFile(err);
+
+  // Send a generic error response to the client
+  res.status(err.statusCode || 500).json({
+    message:
+      err.message ||
+      "An internal server error occurred. Please try again later.",
+  });
+});
+
 
 app.listen(PORT, () => {
   console.log(`Learner-Service at ${PORT}`);

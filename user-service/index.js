@@ -29,9 +29,18 @@ initializePassport();
 const stripe = require("stripe")(process.env.STRIPE_SECRET);
 const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
+const fs = require("fs");
+const path = require("path");
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser());
+
+// Logging error details to a file
+const logFilePath = path.join(__dirname, 'error.log');
+const logErrorToFile = (error) => {
+    const logMessage = `[${new Date().toISOString()}] ${error.stack || error}\n`;
+    fs.appendFileSync(logFilePath, logMessage);
+};
 
 
 app.use(
@@ -250,8 +259,7 @@ app.post("/register", cors(corsOptions), async (req, res) => {
     await newUser.save();
     res.status(200).json({ message: newUser });
   } catch (err) {
-    console.error("Error in userRegister:", err.message);
-    res.status(500).json({ error: "Internal server error" });
+    next(err);
   }
 });
 
@@ -301,8 +309,7 @@ app.post("/login", cors(corsOptions), async (req, res) => {
       });
     });
   } catch (err) {
-    console.error("Error in userLogin:", err.message);
-    res.status(500).json({ error: "Internal server error" });
+    next(err);
   }
 });
 
@@ -335,8 +342,7 @@ app.put("/users/:userId/deactivate", cors(corsOptions), async (req, res) => {
 
     res.json({ message: "User deactivated successfully" });
   } catch (err) {
-    console.error("Error in deactivating user:", err.message);
-    res.status(500).json({ error: "Internal server error" });
+    next(err);
   }
 });
 
@@ -353,8 +359,7 @@ app.get("/api/:userId/users", cors(corsOptions), async (req, res) => {
     const users = await User.find({ _id: { $ne: _id } }).select("-password");
     res.json(users);
   } catch (err) {
-    console.error("Error fetching users:", err);
-    res.status(500).json({ error: "Internal server error" });
+    next(err);
   }
 });
 
@@ -383,8 +388,7 @@ app.put("/api/users/:userId/role", cors(corsOptions), async (req, res) => {
 
     res.json(updatedUser);
   } catch (err) {
-    console.error("Error updating user role:", err);
-    res.status(500).json({ error: "Internal server error" });
+    next(err);
   }
 });
 
@@ -457,10 +461,7 @@ app.post("/forgotPassword", cors(corsOptions), async (req, res) => {
       helper();
     }, 300000);
   } catch (err) {
-    console.log("Error in sending email", err.message);
-    return res
-      .status(400)
-      .json({ message: `Error in generateOTP: ${err.message}` });
+    next(err);
   }
 });
 
@@ -490,8 +491,7 @@ app.post("/postOTP", cors(corsOptions), async (req, res) => {
     await user.save();
     return res.status(200).json({ message: "Password Changed" });
   } catch (err) {
-    console.log("Error in submitting otp", err.message);
-    return res.status(400).json({ message: `Error in postOTP${err.message}` });
+    next(err);
   }
 });
 
@@ -523,10 +523,7 @@ app.post(
       await user.save();
       res.status(200).json({ message: "Password Updated" });
     } catch (err) {
-      console.log("Error in updating password", err.message);
-      return res
-        .status(400)
-        .json({ message: `Error in updatePassword${err.message}` });
+      next(err);
     }
   }
 );
@@ -575,8 +572,7 @@ app.post("/buyCourse/:courseId", cors(corsOptions), async (req, res) => {
 
     return res.status(200).json({ message: course });
   } catch (err) {
-    console.log("error in buyCourse", err.message);
-    res.status(400).json({ "Error in buyCourse": err.message });
+    next(err);
   }
 });
 
@@ -607,10 +603,25 @@ app.post("/create-checkout-session", cors(corsOptions), async (req, res) => {
 
     res.json({ id: session.id });
   } catch (err) {
-    console.error("Stripe Checkout Session creation failed:", err);
-    res.status(500).send({ error: err.message });
+    next(err);
   }
 });
+
+app.use((err, req, res, next) => {
+  // Log the error to the console or a log file
+  console.error(err);
+
+  // Log error details to a file
+  logErrorToFile(err);
+
+  // Send a generic error response to the client
+  res.status(err.statusCode || 500).json({
+    message:
+      err.message ||
+      "An internal server error occurred. Please try again later.",
+  });
+});
+
 
 app.listen(PORT, () => {
   console.log(`User-Service at ${PORT}`);

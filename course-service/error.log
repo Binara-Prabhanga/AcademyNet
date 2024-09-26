@@ -1,0 +1,552 @@
+[2024-09-26T16:33:45.834Z] TypeError: Secret string must be provided.
+    at Object.exports.unsign (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-signature\index.js:38:40)
+    at signedCookie (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:143:25)
+    at signedCookies (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:173:11)
+    at cookieParser (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:64:27)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at D:\SSD Project\AcademyNet\course-service\index.js:158:3
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at cors (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:188:7)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:224:17
+    at origin (D:\SSD Project\AcademyNet\course-service\index.js:113:25)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:219:13
+    at optionsCallback (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:199:9)
+    at corsMiddleware (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:204:7)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+[2024-09-26T16:33:45.846Z] TypeError: Secret string must be provided.
+    at Object.exports.unsign (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-signature\index.js:38:40)
+    at signedCookie (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:143:25)
+    at signedCookies (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:173:11)
+    at cookieParser (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:64:27)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at D:\SSD Project\AcademyNet\course-service\index.js:158:3
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at cors (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:188:7)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:224:17
+    at origin (D:\SSD Project\AcademyNet\course-service\index.js:113:25)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:219:13
+    at optionsCallback (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:199:9)
+    at corsMiddleware (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:204:7)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+[2024-09-26T16:33:45.850Z] TypeError: Secret string must be provided.
+    at Object.exports.unsign (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-signature\index.js:38:40)
+    at signedCookie (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:143:25)
+    at signedCookies (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:173:11)
+    at cookieParser (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:64:27)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at D:\SSD Project\AcademyNet\course-service\index.js:158:3
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at cors (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:188:7)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:224:17
+    at origin (D:\SSD Project\AcademyNet\course-service\index.js:113:25)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:219:13
+    at optionsCallback (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:199:9)
+    at corsMiddleware (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:204:7)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+[2024-09-26T16:33:45.854Z] TypeError: Secret string must be provided.
+    at Object.exports.unsign (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-signature\index.js:38:40)
+    at signedCookie (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:143:25)
+    at signedCookies (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:173:11)
+    at cookieParser (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:64:27)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at D:\SSD Project\AcademyNet\course-service\index.js:158:3
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at cors (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:188:7)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:224:17
+    at origin (D:\SSD Project\AcademyNet\course-service\index.js:113:25)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:219:13
+    at optionsCallback (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:199:9)
+    at corsMiddleware (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:204:7)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+[2024-09-26T16:33:45.857Z] TypeError: Secret string must be provided.
+    at Object.exports.unsign (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-signature\index.js:38:40)
+    at signedCookie (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:143:25)
+    at signedCookies (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:173:11)
+    at cookieParser (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:64:27)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at D:\SSD Project\AcademyNet\course-service\index.js:158:3
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at cors (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:188:7)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:224:17
+    at origin (D:\SSD Project\AcademyNet\course-service\index.js:113:25)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:219:13
+    at optionsCallback (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:199:9)
+    at corsMiddleware (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:204:7)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+[2024-09-26T16:33:45.982Z] TypeError: Secret string must be provided.
+    at Object.exports.unsign (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-signature\index.js:38:40)
+    at signedCookie (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:143:25)
+    at signedCookies (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:173:11)
+    at cookieParser (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:64:27)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at D:\SSD Project\AcademyNet\course-service\index.js:158:3
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at cors (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:188:7)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:224:17
+    at origin (D:\SSD Project\AcademyNet\course-service\index.js:113:25)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:219:13
+    at optionsCallback (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:199:9)
+    at corsMiddleware (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:204:7)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+[2024-09-26T16:33:46.009Z] TypeError: Secret string must be provided.
+    at Object.exports.unsign (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-signature\index.js:38:40)
+    at signedCookie (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:143:25)
+    at signedCookies (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:173:11)
+    at cookieParser (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:64:27)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at D:\SSD Project\AcademyNet\course-service\index.js:158:3
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at cors (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:188:7)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:224:17
+    at origin (D:\SSD Project\AcademyNet\course-service\index.js:113:25)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:219:13
+    at optionsCallback (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:199:9)
+    at corsMiddleware (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:204:7)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+[2024-09-26T16:33:46.013Z] TypeError: Secret string must be provided.
+    at Object.exports.unsign (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-signature\index.js:38:40)
+    at signedCookie (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:143:25)
+    at signedCookies (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:173:11)
+    at cookieParser (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:64:27)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at D:\SSD Project\AcademyNet\course-service\index.js:158:3
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at cors (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:188:7)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:224:17
+    at origin (D:\SSD Project\AcademyNet\course-service\index.js:113:25)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:219:13
+    at optionsCallback (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:199:9)
+    at corsMiddleware (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:204:7)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+[2024-09-26T16:33:46.020Z] TypeError: Secret string must be provided.
+    at Object.exports.unsign (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-signature\index.js:38:40)
+    at signedCookie (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:143:25)
+    at signedCookies (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:173:11)
+    at cookieParser (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:64:27)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at D:\SSD Project\AcademyNet\course-service\index.js:158:3
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at cors (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:188:7)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:224:17
+    at origin (D:\SSD Project\AcademyNet\course-service\index.js:113:25)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:219:13
+    at optionsCallback (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:199:9)
+    at corsMiddleware (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:204:7)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+[2024-09-26T16:33:46.030Z] TypeError: Secret string must be provided.
+    at Object.exports.unsign (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-signature\index.js:38:40)
+    at signedCookie (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:143:25)
+    at signedCookies (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:173:11)
+    at cookieParser (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:64:27)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at D:\SSD Project\AcademyNet\course-service\index.js:158:3
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at cors (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:188:7)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:224:17
+    at origin (D:\SSD Project\AcademyNet\course-service\index.js:113:25)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:219:13
+    at optionsCallback (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:199:9)
+    at corsMiddleware (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:204:7)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+[2024-09-26T16:33:46.059Z] TypeError: Secret string must be provided.
+    at Object.exports.unsign (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-signature\index.js:38:40)
+    at signedCookie (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:143:25)
+    at signedCookies (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:173:11)
+    at cookieParser (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:64:27)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at D:\SSD Project\AcademyNet\course-service\index.js:158:3
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at cors (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:188:7)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:224:17
+    at origin (D:\SSD Project\AcademyNet\course-service\index.js:113:25)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:219:13
+    at optionsCallback (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:199:9)
+    at corsMiddleware (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:204:7)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+[2024-09-26T16:33:46.116Z] TypeError: Secret string must be provided.
+    at Object.exports.unsign (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-signature\index.js:38:40)
+    at signedCookie (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:143:25)
+    at signedCookies (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:173:11)
+    at cookieParser (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:64:27)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at D:\SSD Project\AcademyNet\course-service\index.js:158:3
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at cors (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:188:7)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:224:17
+    at origin (D:\SSD Project\AcademyNet\course-service\index.js:113:25)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:219:13
+    at optionsCallback (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:199:9)
+    at corsMiddleware (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:204:7)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+[2024-09-26T16:33:46.119Z] TypeError: Secret string must be provided.
+    at Object.exports.unsign (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-signature\index.js:38:40)
+    at signedCookie (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:143:25)
+    at signedCookies (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:173:11)
+    at cookieParser (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:64:27)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at D:\SSD Project\AcademyNet\course-service\index.js:158:3
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at cors (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:188:7)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:224:17
+    at origin (D:\SSD Project\AcademyNet\course-service\index.js:113:25)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:219:13
+    at optionsCallback (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:199:9)
+    at corsMiddleware (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:204:7)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+[2024-09-26T16:33:46.123Z] TypeError: Secret string must be provided.
+    at Object.exports.unsign (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-signature\index.js:38:40)
+    at signedCookie (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:143:25)
+    at signedCookies (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:173:11)
+    at cookieParser (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:64:27)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at D:\SSD Project\AcademyNet\course-service\index.js:158:3
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at cors (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:188:7)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:224:17
+    at origin (D:\SSD Project\AcademyNet\course-service\index.js:113:25)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:219:13
+    at optionsCallback (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:199:9)
+    at corsMiddleware (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:204:7)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+[2024-09-26T16:46:18.781Z] TypeError: Secret string must be provided.
+    at Object.exports.unsign (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-signature\index.js:38:40)
+    at signedCookie (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:143:25)
+    at signedCookies (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:173:11)
+    at cookieParser (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:64:27)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at D:\SSD Project\AcademyNet\course-service\index.js:158:3
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at cors (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:188:7)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:224:17
+    at origin (D:\SSD Project\AcademyNet\course-service\index.js:113:25)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:219:13
+    at optionsCallback (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:199:9)
+    at corsMiddleware (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:204:7)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+[2024-09-26T16:46:18.895Z] TypeError: Secret string must be provided.
+    at Object.exports.unsign (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-signature\index.js:38:40)
+    at signedCookie (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:143:25)
+    at signedCookies (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:173:11)
+    at cookieParser (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:64:27)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at D:\SSD Project\AcademyNet\course-service\index.js:158:3
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at cors (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:188:7)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:224:17
+    at origin (D:\SSD Project\AcademyNet\course-service\index.js:113:25)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:219:13
+    at optionsCallback (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:199:9)
+    at corsMiddleware (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:204:7)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+[2024-09-26T16:46:18.907Z] TypeError: Secret string must be provided.
+    at Object.exports.unsign (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-signature\index.js:38:40)
+    at signedCookie (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:143:25)
+    at signedCookies (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:173:11)
+    at cookieParser (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:64:27)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at D:\SSD Project\AcademyNet\course-service\index.js:158:3
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at cors (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:188:7)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:224:17
+    at origin (D:\SSD Project\AcademyNet\course-service\index.js:113:25)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:219:13
+    at optionsCallback (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:199:9)
+    at corsMiddleware (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:204:7)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+[2024-09-26T16:46:18.924Z] TypeError: Secret string must be provided.
+    at Object.exports.unsign (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-signature\index.js:38:40)
+    at signedCookie (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:143:25)
+    at signedCookies (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:173:11)
+    at cookieParser (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:64:27)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at D:\SSD Project\AcademyNet\course-service\index.js:158:3
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at cors (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:188:7)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:224:17
+    at origin (D:\SSD Project\AcademyNet\course-service\index.js:113:25)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:219:13
+    at optionsCallback (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:199:9)
+    at corsMiddleware (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:204:7)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+[2024-09-26T16:46:18.940Z] TypeError: Secret string must be provided.
+    at Object.exports.unsign (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-signature\index.js:38:40)
+    at signedCookie (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:143:25)
+    at signedCookies (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:173:11)
+    at cookieParser (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:64:27)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at D:\SSD Project\AcademyNet\course-service\index.js:158:3
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at cors (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:188:7)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:224:17
+    at origin (D:\SSD Project\AcademyNet\course-service\index.js:113:25)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:219:13
+    at optionsCallback (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:199:9)
+    at corsMiddleware (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:204:7)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+[2024-09-26T16:46:18.950Z] TypeError: Secret string must be provided.
+    at Object.exports.unsign (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-signature\index.js:38:40)
+    at signedCookie (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:143:25)
+    at signedCookies (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:173:11)
+    at cookieParser (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:64:27)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at D:\SSD Project\AcademyNet\course-service\index.js:158:3
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at cors (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:188:7)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:224:17
+    at origin (D:\SSD Project\AcademyNet\course-service\index.js:113:25)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:219:13
+    at optionsCallback (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:199:9)
+    at corsMiddleware (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:204:7)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+[2024-09-26T16:46:18.957Z] TypeError: Secret string must be provided.
+    at Object.exports.unsign (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-signature\index.js:38:40)
+    at signedCookie (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:143:25)
+    at signedCookies (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:173:11)
+    at cookieParser (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:64:27)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at D:\SSD Project\AcademyNet\course-service\index.js:158:3
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at cors (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:188:7)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:224:17
+    at origin (D:\SSD Project\AcademyNet\course-service\index.js:113:25)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:219:13
+    at optionsCallback (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:199:9)
+    at corsMiddleware (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:204:7)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+[2024-09-26T16:46:18.961Z] TypeError: Secret string must be provided.
+    at Object.exports.unsign (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-signature\index.js:38:40)
+    at signedCookie (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:143:25)
+    at signedCookies (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:173:11)
+    at cookieParser (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:64:27)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at D:\SSD Project\AcademyNet\course-service\index.js:158:3
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at cors (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:188:7)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:224:17
+    at origin (D:\SSD Project\AcademyNet\course-service\index.js:113:25)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:219:13
+    at optionsCallback (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:199:9)
+    at corsMiddleware (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:204:7)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+[2024-09-26T16:46:18.976Z] TypeError: Secret string must be provided.
+    at Object.exports.unsign (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-signature\index.js:38:40)
+    at signedCookie (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:143:25)
+    at signedCookies (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:173:11)
+    at cookieParser (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:64:27)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at D:\SSD Project\AcademyNet\course-service\index.js:158:3
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at cors (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:188:7)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:224:17
+    at origin (D:\SSD Project\AcademyNet\course-service\index.js:113:25)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:219:13
+    at optionsCallback (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:199:9)
+    at corsMiddleware (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:204:7)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+[2024-09-26T16:46:19.018Z] TypeError: Secret string must be provided.
+    at Object.exports.unsign (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-signature\index.js:38:40)
+    at signedCookie (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:143:25)
+    at signedCookies (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:173:11)
+    at cookieParser (D:\SSD Project\AcademyNet\course-service\node_modules\cookie-parser\index.js:64:27)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at D:\SSD Project\AcademyNet\course-service\index.js:158:3
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:317:13)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\index.js:275:10)
+    at cors (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:188:7)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:224:17
+    at origin (D:\SSD Project\AcademyNet\course-service\index.js:113:25)
+    at D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:219:13
+    at optionsCallback (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:199:9)
+    at corsMiddleware (D:\SSD Project\AcademyNet\course-service\node_modules\cors\lib\index.js:204:7)
+    at Layer.handle [as handle_request] (D:\SSD Project\AcademyNet\course-service\node_modules\express\lib\router\layer.js:95:5)

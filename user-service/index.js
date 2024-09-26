@@ -1,5 +1,9 @@
 const express = require("express");
+const session = require("express-session");
+const cors = require("cors");
 const helmet = require("helmet");
+const passport = require("passport");
+require("./config/passport"); 
 const app = express();
 const Razorpay = require("razorpay");
 const PORT = process.env.PORT_ONE || 5000;
@@ -9,7 +13,6 @@ const nodemailer = require("nodemailer");
 const Course = require("./course");
 const jwt = require("jsonwebtoken");
 const amqp = require("amqplib");
-const passport = require("passport");
 const bcrypt = require("bcryptjs");
 const axios = require("axios");
 const gravatar = require("gravatar");
@@ -24,20 +27,65 @@ dotenv.config();
 const initializePassport = require("./config/passport");
 initializePassport();
 const stripe = require("stripe")(process.env.STRIPE_SECRET);
-const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser());
+
+
 app.use(
-  cors({
-    origin: ["http://localhost:3000"],
-    credentials: true,
-    allowedHeaders: ["Content-Type", "Authorization"],
-    methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"],
+  session({
+    secret:
+      "ZvEFI9ZLHTia1VeUas4J3D6pYPdGyFRmQ2h4gh0RXZXOv3Cw6YhT2Ec400xZM8edwd",
+    resave: false,
+    saveUninitialized: true,
   })
 );
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.get(
+  "/auth/google",
+  passport.authenticate("google", { scope: ["profile", "email"] })
+);
+
+app.get(
+  "/auth/google/callback",
+  passport.authenticate("google", { failureRedirect: "/" }),
+  (req, res) => {
+    res.redirect("/"); // Redirect to your desired route after successful login
+  }
+);
+
+app.get("/logout", (req, res) => {
+  req.logout();
+  res.redirect("/");
+});
+
+const allowedOrigins = [
+  "http://localhost:3000",
+  "http://localhost:8080",
+  "http://localhost:5000",
+];
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true); // Allow non-browser clients (like curl)
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true); // Allow requests from allowed origins
+    } else {
+      return callback(new Error("Not allowed by CORS"), false); // Block others
+    }
+  },
+  credentials: true, // Allow credentials (cookies, authorization headers)
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Allow specific methods
+  allowedHeaders: ["Content-Type", "Authorization"], // Allow specific headers
+  preflightContinue: false, // Disable passing preflight responses to next handlers
+  optionsSuccessStatus: 204, // Response status for successful OPTIONS requests
+};
+app.use(cors(corsOptions));
+
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Credentials", true);
@@ -53,17 +101,60 @@ app.use(
   helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "https://trusted-scripts.com"],
-      styleSrc: ["'self'", "'unsafe-inline'"],
-      imgSrc: ["'self'", "https://trusted-images.com"],
-      connectSrc: ["'self'", "https://api.trusted.com"],
-      frameAncestors: ["'none'"],
+      scriptSrc: [
+        "'self'",
+        "https://js.stripe.com",
+        "https://trusted-scripts.com",
+        "https://m.stripe.network",
+        "'sha256-/5Guo2nzv5n/w6ukZpOBZOtTJBJPSkJ6mhHpnBgm3Ls='"
+      ],
+      styleSrc: [
+        "'self'",
+        "'sha256-0hAheEzaMe6uXIKV4EehS9pu1am1lj/KnnzrOYqckXk='",
+        "'unsafe-inline'",
+        "https://m.stripe.network",
+      ],
+      imgSrc: [
+        "'self'",
+        "https://q.stripe.com",
+        "https://trusted-images.com",
+        "https://m.stripe.network",
+        "https://b.stripecdn.com"
+      ],
+      mediarc: ["'none'"],
+      connectSrc: [
+        "'self'",
+        "https://api.stripe.com",
+        "https://merchant-ui-api.stripe.com",
+      ],
+      frameSrc: ["'self'", "https://m.stripe.network"],
       formAction: ["'self'"],
+      frameAncestors: ["'none'"],
       upgradeInsecureRequests: [],
       objectSrc: ["'none'"],
+      baseUri: ["'none'"],
+      reportUri: ["https://q.stripe.com/csp-report"],
+      workerSrc: ["'none'"],
+      // Add the report-to directive for newer CSP reporting
+      reportTo: "/csp-violation-report-endpoint"
     },
+    reportOnly: false,
   })
 );
+
+// explicitly suppress the X-Powered-By header
+app.use(helmet.hidePoweredBy());
+
+// disable x-powered-by header
+app.disable("x-powered-by")
+
+app.use((req, res, next) => {
+  res.setHeader(
+    "Strict-Transport-Security",
+    "max-age=31536000; includeSubDomains; preload"
+  );
+  next();
+});
 
 let loggedInUsers = [];
 app.use(morgan("dev"));
@@ -74,22 +165,30 @@ var channel, connection;
 
 app.use(express.json());
 app.use((req, res, next) => {
-  res.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains; preload");
-  res.setHeader('X-Content-Type-Options', 'nosniff');
-  res.setHeader("X-Frame-Options", "SAMEORIGIN"); // Allow framing from the same origin
+  // Set security headers
+  res.setHeader("X-Content-Type-Options", "nosniff");
   res.setHeader("X-Frame-Options", "DENY"); // Deny framing entirely
-  // Alternatively, use Content-Security-Policy's frame-ancestors directive
-  res.setHeader("Content-Security-Policy", "frame-ancestors 'self';"); // Allow framing only from the same origin
-  res.setHeader("X-Frame-Options", "DENY");// Deny framing entirely
-  const host = req.headers.host;
+  res.setHeader(
+    "Strict-Transport-Security",
+    "max-age=31536000; includeSubDomains; preload"
+  ); // Set HSTS
 
-  // Check for any attempt to access cloud metadata IP or its variations
+  // Get the IP address of the request
+  const forwardedFor =
+    req.headers["x-forwarded-for"] || req.connection.remoteAddress;
+
+  // Define the metadata IP we want to block
+  const metadataIP = "169.254.169.254";
+
+  // Check if the request is attempting to access the metadata IP
   const isMetadataIP =
-    host === "169.254.169.254" ||
-    req.url.includes("169.254.169.254") ||
-    req.hostname === "169.254.169.254";
+    req.headers.host === metadataIP ||
+    req.url.includes(metadataIP) ||
+    req.hostname === metadataIP ||
+    forwardedFor.includes(metadataIP);
 
   if (isMetadataIP) {
+    console.log(`Blocked attempt to access metadata IP from ${forwardedFor}`);
     return res.status(403).json({ error: "Access Forbidden" });
   }
 
@@ -115,7 +214,24 @@ async function connect() {
 }
 connect();
 
-app.post("/register", async (req, res) => {
+// configure CSP
+app.get('/', (req, res) => {
+  res.send('user-service is running with CSP.');
+});
+
+// Apply CSP middleware to all routes
+app.get('/', (req, res) => {
+  res.send('CSP is set for user-service!');
+});
+
+// CSP Reporting Endpoint
+app.post('/csp-violation-report-endpoint', (req, res) => {
+  console.log('CSP Violation Report:', req.body);
+  // You can log this to a file or a logging service here
+  res.status(204).end(); // Respond with no content
+});
+
+app.post("/register", cors(corsOptions), async (req, res) => {
   try {
     const { errors, isValid } = validateUserRegisterInput(req.body);
     if (!isValid) {
@@ -149,7 +265,7 @@ app.post("/register", async (req, res) => {
   }
 });
 
-app.post("/login", async (req, res) => {
+app.post("/login", cors(corsOptions), async (req, res) => {
   try {
     const { errors, isValid } = validateUserLoginInput(req.body);
     if (!isValid) {
@@ -200,8 +316,17 @@ app.post("/login", async (req, res) => {
   }
 });
 
+app.get(
+  "/auth/google/callback",
+  passport.authenticate("google", { failureRedirect: "/" }),
+  (req, res) => {
+    console.log("Google OAuth successful", req.user); // Log user details
+    res.redirect("/");
+  }
+);
+
 // ADMIN
-app.put("/users/:userId/deactivate", async (req, res) => {
+app.put("/users/:userId/deactivate", cors(corsOptions), async (req, res) => {
   try {
     const userId = req.params.userId;
 
@@ -225,10 +350,11 @@ app.put("/users/:userId/deactivate", async (req, res) => {
   }
 });
 
+
 //ADMIN
 //Hash Disclosure - BCrypt
 // FETCH USERS (Excluding Password)
-app.get("/api/:userId/users", async (req, res) => {
+app.get("/api/:userId/users", cors(corsOptions), async (req, res) => {
   try {
     // Get the _id of the logged-in user
     const _id = req.params.userId;
@@ -244,7 +370,7 @@ app.get("/api/:userId/users", async (req, res) => {
 
 //Hash Disclosure - BCrypt
 // ADMIN - UPDATE USER ROLE (Excluding Password)
-app.put("/api/users/:userId/role", async (req, res) => {
+app.put("/api/users/:userId/role", cors(corsOptions), async (req, res) => {
   try {
     const userId = req.params.userId;
     const { role } = req.body;
@@ -300,7 +426,7 @@ async function sendEmail(to, OTP, subject) {
 }
 
 // Update the sendEmail function call in your /forgotPassword route
-app.post("/forgotPassword", async (req, res) => {
+app.post("/forgotPassword", cors(corsOptions), async (req, res) => {
   try {
     const { errors, isValid } = validateForgotPassword(req.body);
     if (!isValid) {
@@ -349,7 +475,7 @@ app.post("/forgotPassword", async (req, res) => {
 });
 
 // Post OTP
-app.post("/postOTP", async (req, res) => {
+app.post("/postOTP", cors(corsOptions), async (req, res) => {
   try {
     const { errors, isValid } = validateOTP(req.body);
     if (!isValid) {
@@ -384,6 +510,7 @@ app.post("/postOTP", async (req, res) => {
 app.post(
   "/updatePassword",
   passport.authenticate("jwt", { session: false }),
+  cors(corsOptions),
   async (req, res) => {
     try {
       const { errors, isValid } = validateUserUpdatePassword(req.body);
@@ -416,7 +543,7 @@ app.post(
 
 // Buy Course
 // POST endpoint to process a course purchase by a user.
-app.post("/buyCourse/:courseId", async (req, res) => {
+app.post("/buyCourse/:courseId", cors(corsOptions), async (req, res) => {
   try {
     // Extract userId from request body and courseId from parameters
     const userId = req.body.userId;
@@ -463,7 +590,7 @@ app.post("/buyCourse/:courseId", async (req, res) => {
   }
 });
 
-app.post("/create-checkout-session", async (req, res) => {
+app.post("/create-checkout-session", cors(corsOptions), async (req, res) => {
   const { course } = req.body;
 
   try {

@@ -33,7 +33,12 @@ initializePassport();
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(cookieParser());
+app.use(
+  cookieParser({
+    sameSite: "Lax",
+    secure: true, // Ensure cookies are only sent over HTTPS
+  })
+);
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Credentials", true);

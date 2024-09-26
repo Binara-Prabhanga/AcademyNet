@@ -45,11 +45,25 @@ app.use(function (req, res, next) {
   next();
 });
 
-// Configure CORS
+const allowedOrigins = [
+  "http://localhost:3000",
+  "http://localhost:8080",
+  "http://localhost:5000",
+];
+
 const corsOptions = {
-  origin: ["http://localhost:8080", "http://localhost:5000", "http://localhost:3000"],
+  origin: (origin, callback) => {
+    // Allow requests with no origin like mobile apps, curl, etc.
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg =
+        "The CORS policy for this site does not allow access from the specified origin.";
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
   methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true, // Allow credentials
+  credentials: true, // Allow cookies or authentication credentials
   allowedHeaders: ["Content-Type", "Authorization"],
 };
 app.use(cors(corsOptions));
@@ -113,6 +127,7 @@ mongoose.connect(
 // User Courses (Excluding Password)
 app.get(
   "/userCourses",
+  cors(corsOptions),
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     try {
@@ -135,6 +150,7 @@ app.get(
 
 app.delete(
   "/deleteUserCourses/:courseId",
+  cors(corsOptions),
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     try {
@@ -170,6 +186,7 @@ app.delete(
 // Comment on Q&A
 app.post(
   "/commentOnQna/:courseId/:videoIndex",
+  cors(corsOptions),
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     try {
@@ -206,6 +223,7 @@ app.post(
 
 app.post(
   "/submit-answers",
+  cors(corsOptions),
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     try {
@@ -257,6 +275,7 @@ app.post(
 
 app.delete(
   "/deleteUserQuiz/:quizId",
+  cors(corsOptions),
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     try {
@@ -286,6 +305,7 @@ app.delete(
 // Add to Cart
 app.get(
   "/addToCart/:courseId",
+  cors(corsOptions),
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     try {

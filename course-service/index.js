@@ -54,14 +54,27 @@ app.use(cookieParser());
 app.use(morgan("dev"));
 app.use(passport.initialize());
 
-// Configure CORS
+const allowedOrigins = [
+  "http://localhost:3000",
+  "http://localhost:8080",
+  "http://localhost:5000",
+];
+
 const corsOptions = {
-  origin: ["http://localhost:8080", "http://localhost:5000", "http://localhost:3000"],
+  origin: (origin, callback) => {
+    // Allow requests with no origin like mobile apps, curl, etc.
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg =
+        "The CORS policy for this site does not allow access from the specified origin.";
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
   methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true,
+  credentials: true, // Allow cookies or authentication credentials
   allowedHeaders: ["Content-Type", "Authorization"],
 };
-
 app.use(cors(corsOptions));
 
 // Add middleware to block malicious Host headers targeting internal IP addresses
@@ -99,6 +112,7 @@ mongoose.connect(
 // Add Course
 app.post(
   "/addCourse",
+  cors(corsOptions),
   passport.authenticate("jwt", { session: false }),
   upload.single("file"),
   async (req, res) => {
@@ -142,6 +156,7 @@ app.post(
 // FETCH ALL APPROVED COURSES (Excluding Password)
 app.get(
   "/getAllCourse",
+  cors(corsOptions),
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     try {
@@ -176,6 +191,7 @@ app.get(
 // FETCH ALL NON-APPROVED COURSES (Excluding Password)
 app.get(
   "/getAllCourseNot",
+  cors(corsOptions),
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     try {
@@ -213,6 +229,7 @@ app.get(
 // Update Course Approval
 app.put(
   "/updateCourseApproval/:courseId",
+  cors(corsOptions),
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     try {
@@ -255,6 +272,7 @@ app.put(
 // FETCH COURSE DETAILS BY ID (Excluding Password)
 app.get(
   "/getCourseById/:courseId",
+  cors(corsOptions),
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     try {
@@ -276,6 +294,7 @@ app.get(
 
 app.put(
   "/updateCourse/:courseId",
+  cors(corsOptions),
   passport.authenticate("jwt", { session: false }),
   upload.fields([
     { name: "file", maxCount: 1 },
@@ -355,6 +374,7 @@ app.put(
 // Delete Course
 app.delete(
   "/deleteCourse/:courseId",
+  cors(corsOptions),
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     try {
@@ -384,6 +404,7 @@ app.delete(
 
 app.delete(
   "/deleteCourseVideo/:courseId/:videoIndex",
+  cors(corsOptions),
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     try {
@@ -419,6 +440,7 @@ app.delete(
 
 app.post(
   "/createQuiz",
+  cors(corsOptions),
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     try {
@@ -475,6 +497,7 @@ app.post(
 
 app.get(
   "/quizzes/:courseId",
+  cors(corsOptions),
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     try {
@@ -498,6 +521,7 @@ app.get(
 
 app.delete(
   "/quizzes/:quizId",
+  cors(corsOptions),
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     try {
@@ -532,6 +556,7 @@ app.delete(
 
 app.get(
   "/user/quizzes",
+  cors(corsOptions),
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     try {
@@ -558,6 +583,7 @@ app.get(
 
 app.get(
   "/quizzesList/:courseId",
+  cors(corsOptions),
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     try {
@@ -582,6 +608,7 @@ app.get(
 
 app.get(
   "/user/details",
+  cors(corsOptions),
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     try {
